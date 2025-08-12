@@ -346,7 +346,7 @@ set racemask = 2568
 where skillid = 173 and racemask = 520;
 
 UPDATE db_SkillRaceClassInfo_12340
-set racemask = 2568
+set racemask = 2698
 where skillid = 45 and racemask = 650;
 
 UPDATE db_SkillRaceClassInfo_12340

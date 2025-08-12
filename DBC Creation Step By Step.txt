@@ -79,8 +79,8 @@ update racemask to 2215 where skill id 44 and racemask 167  (warr axes)
 
 update racemask to 2560 where racemask 512  (weapons and racial belf skills)
 
-UPDATE racemask to 2568 where racemask=520 and skill 173  (probably bows)
-UPDATE racemask to 2568 where racemask=650 and skill 45 (probably bows)
+UPDATE racemask to 2568 where racemask=520 and skill 173 (daggers)
+UPDATE racemask to 2698 where racemask=650 and skill 45 (bows)
 
 update racemask to 3071 where skillid = 759 and racemask = 1023 (no draenei)
 
