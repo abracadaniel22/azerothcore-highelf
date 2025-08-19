@@ -1,0 +1,24 @@
+################################################
+          Individual Progression patch          
+################################################
+
+Server:
+-------------------------------------
+
+Copy DBC files to the server and replace
+
+cp -a DBFilesClient/. $AC_CODE_DIR/build/data/dbc
+
+Apply zz_highelf_individual_prog.sql to acore_world database *after* installation of Individual Progression
+
+Restart worldserver
+
+
+Client:
+-------------------------------------
+
+Copy patch-z.mpq into the client's Data folder
+
+Delete the Cache folder of the client
+
+Start the client
