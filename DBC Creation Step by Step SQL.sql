@@ -442,8 +442,24 @@ SET HideGeoset_1 = 7614 /*Old mask 3518*/
 WHERE ID = 305;
 
 UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 7614 /*Old mask 3518*/
+WHERE ID = 306;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 7614 /*Old mask 3518*/
+WHERE ID = 307;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 7614 /*Old mask 3518*/
+WHERE ID = 345;
+
+UPDATE db_HelmetGeosetVisData_12340
 SET HideGeoset_1 = 8126 /*Old mask 4030*/
 WHERE ID = 366;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 7614 /*Old mask 3518*/
+WHERE ID = 367;
 
 UPDATE db_HelmetGeosetVisData_12340
 SET HideGeoset_5 = 4294961903 /*Old mask 4294965999*/
