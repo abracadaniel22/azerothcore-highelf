@@ -462,5 +462,5 @@ SET HideGeoset_1 = 7614 /*Old mask 3518*/
 WHERE ID = 367;
 
 UPDATE db_HelmetGeosetVisData_12340
-SET HideGeoset_5 = 4294961903 /*Old mask 4294965999*/
+SET HideGeoset_5 = -5393 /*Old mask -1297*/
 WHERE ID = 246;
