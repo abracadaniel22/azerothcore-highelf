@@ -428,3 +428,23 @@ select
 @new_id := @new_id + 1, Name, 12, Sex
 from db_NameGen_12340
 where RaceID=10;
+
+-- --------------------------------
+-- HelmetGeosetVisData
+-- Control whether hair/ears etc are shown
+-- --------------------------------
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 8190 /*Old mask 4094*/
+WHERE ID = 285;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 7614 /*Old mask 3518*/
+WHERE ID = 305;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_1 = 8126 /*Old mask 4030*/
+WHERE ID = 366;
+
+UPDATE db_HelmetGeosetVisData_12340
+SET HideGeoset_5 = 4294961903 /*Old mask 4294965999*/
+WHERE ID = 246;

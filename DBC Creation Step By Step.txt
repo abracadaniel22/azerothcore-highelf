@@ -44,7 +44,6 @@ Put them in an mpq in the client. The exact order depends on what other shit you
 Patch-7.dbc: client only file:
 This file contains all helmets copied and renamed from _Be to _He . Without it, helmets do not display.
 This file also contains the new character Interface modifications. Alternatively, those could just be pasted into Interface folder, but better pack it to keep each release intact.
-Known issue: for High elf, female hair go over some helmets (DK starting helmet for example).
 Patch-a.dbc: contains all DBC files also in the server
 Patch-t.dbc: goes after the HD models patch to rewrite some textures the HD models overwrite. It contains some of the DBC files from patch-a. Added this because the HD patch screws up some textures, likely rewriting things in Patch-a. So patch-t rewrites them again, but not all DBCs were needed.
 Steps done to create helmets in Patch-7:
@@ -144,3 +143,11 @@ NameGen
 VocalUISounds
 duplicate 10 into 12
 after the server loads, run scripts in world db in other file
+
+HelmetGeosetVisData
+Make racemask for High Elf (4096) match flag for Blood Elf (1024)
+For some reason or other the racemask bit is one to the left, i.e. for High Elf is 4096 rather than 2048 :shrug:
+ID 285 - 4094       00000000000000000000111111111110 -> 00000000000000000001111111111110 8190
+ID 305 - 3518       00000000000000000000110110111110 -> 00000000000000000000110110111110 7614
+ID 366 - 4030       00000000000000000000111110111110 -> 00000000000000000001111110111110 8126
+ID 246 - 4294965999 11111111111111111111101011101111 -> 11111111111111111110101011101111 4294961903
