@@ -1,6 +1,6 @@
-# AzerothCore High Elf
+# AzerothCore High Elf custom race
 
-Mod to add High Elves as playable characters on Azeroth Core with support for mod-playerbots.
+Mod to add High Elves as playable characters on Azeroth Core with support for mod-playerbots. By Abracadaniel22.
 
 ## Goals
 
@@ -15,7 +15,8 @@ The goals for this project are very simple and limited, allowing for quick feedb
   - It shares the same models as the Blood Elf race
   - It shares the same starting zone, reputation, skills as the humans
   - High Elves can be any class except shaman or druid
-- Compatible with HD models 
+- Compatible with HD models
+- Compatible with mod-individual-progression (thanks to Dasbadman)
 
 ## Known limitations
 
