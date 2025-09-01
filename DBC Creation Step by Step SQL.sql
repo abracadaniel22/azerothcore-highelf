@@ -113,6 +113,35 @@ ColorIndex
 FROM db_CharSections_12340_worg_no_12
 WHERE RaceID = 10;
 
+-- For non-hd version
+UPDATE db_CharSections_12340 SET RaceID = 24 WHERE RaceID = 12; -- Move Fel Orcs to RaceID 24 otherwise they have no textures
+SET @new_id := (SELECT MAX(ID) FROM db_CharSections_12340);
+INSERT INTO db_CharSections_12340 (
+ID, 
+RaceID, 
+SexID, 
+BaseSection, 
+TextureName_1, 
+TextureName_2, 
+TextureName_3, 
+Flags, 
+VariationIndex, 
+ColorIndex
+)
+SELECT
+@new_id := @new_id + 1, 
+12, 
+SexID, 
+BaseSection, 
+TextureName_1, 
+TextureName_2, 
+TextureName_3, 
+Flags, 
+VariationIndex, 
+ColorIndex
+FROM db_CharSections_12340
+WHERE RaceID = 10;
+
 -- Modify entries 0 to 9 to use the blue eye faceupper models (currently stored in variation 10 to 19)
 UPDATE db_CharSections_12340 AS target
 JOIN db_CharSections_12340 AS source
