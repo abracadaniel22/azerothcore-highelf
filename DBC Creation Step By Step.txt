@@ -105,8 +105,8 @@ See sql file but it's basically:
 	duplicate belf entries in CreatureDisplayInfo and link to new entries created in creaturedisplayinfoextra
 	
 CharSections
-USE WORGOBLIN DBC AS STARTING POINT
-DELETE where raceid is 12
+USE VANILLA DBC AS STARTING POINT
+SET RaceID = 24 WHERE RaceID = 12 (Set Fel Orc ID 12 -> 24)
 duplicate 10 into 12
 
 CharacterFacilHairStyles
