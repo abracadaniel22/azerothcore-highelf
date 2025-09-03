@@ -44,6 +44,12 @@ Put them in an mpq in the client. The exact order depends on what other shit you
 Patch-7.dbc: client only file:
 This file contains all helmets copied and renamed from _Be to _He . Without it, helmets do not display.
 This file also contains the new character Interface modifications. Alternatively, those could just be pasted into Interface folder, but better pack it to keep each release intact.
+Copy blood elf skeleton files and rename high elf:
+common-2.MPQ:World\GENERIC\PASSIVEDOODADS\DEATHSKELETONS\BloodElfFemaleDeathSkeleton00.skin
+common-2.MPQ:World\GENERIC\PASSIVEDOODADS\DEATHSKELETONS\BloodElfMaleDeathSkeleton00.skin
+patch.MPQ:World\Generic\PassiveDoodads\DEATHSKELETONS\BloodElfFemaleDeathSkeleton.m2
+patch.MPQ:World\Generic\PassiveDoodads\DEATHSKELETONS\BloodElfMaleDeathSkeleton.m2
+
 Patch-a.dbc: contains all DBC files also in the server
 Patch-t.dbc: goes after the HD models patch to rewrite some textures the HD models overwrite. It contains some of the DBC files from patch-a. Added this because the HD patch screws up some textures, likely rewriting things in Patch-a. So patch-t rewrites them again, but not all DBCs were needed.
 Steps done to create helmets in Patch-7:
