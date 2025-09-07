@@ -49,6 +49,7 @@ common-2.MPQ:World\GENERIC\PASSIVEDOODADS\DEATHSKELETONS\BloodElfFemaleDeathSkel
 common-2.MPQ:World\GENERIC\PASSIVEDOODADS\DEATHSKELETONS\BloodElfMaleDeathSkeleton00.skin
 patch.MPQ:World\Generic\PassiveDoodads\DEATHSKELETONS\BloodElfFemaleDeathSkeleton.m2
 patch.MPQ:World\Generic\PassiveDoodads\DEATHSKELETONS\BloodElfMaleDeathSkeleton.m2
+Copied and renamed TemporaryPortrait* files from BloodElf to HighElf from Data\enUS\patch-enUS-2.MPQ into Patch-7.mpq (see PR #20)
 
 Patch-a.dbc: contains all DBC files also in the server
 Patch-t.dbc: goes after the HD models patch to rewrite some textures the HD models overwrite. It contains some of the DBC files from patch-a. Added this because the HD patch screws up some textures, likely rewriting things in Patch-a. So patch-t rewrites them again, but not all DBCs were needed.
