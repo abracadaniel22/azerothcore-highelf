@@ -1,5 +1,6 @@
 -- This file contains queries used to update data in DBC files exported to mysql
 -- There is no need to run this if your goal is to just use the mod.
+-- This file can be specially useful if you would like to manually "merge" changes to a particular DBC instead of fully replacing it
 -- @ author abracadaniel22
 -- See DBC Creation Step By Step.txt
 

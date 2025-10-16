@@ -9,6 +9,8 @@ The goals for this project are very simple and limited, allowing for quick feedb
 1. Duplicate blood elf models into a new high elf race
 2. Copy everything else from humans (starting zone, mounts, reputation, quests, etc)
 
+Anything extra or too intrusive should be added as optional features in the "extras" directory. The base mod should remain as clean as possible with the minimum changes to make the custom race reasonably work.
+
 ## Features
 
 - A new High Elf alliance race is added
