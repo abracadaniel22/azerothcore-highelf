@@ -1,4 +1,5 @@
 -- TO BE RUN AFTER INDIVIDUAL PROGRESSION SQL FILES
+-- Apply to acore_world database
 
 -- Give High Elves weapon skills to match Human Warrior / Night Elf Hunter
 UPDATE `playercreateinfo_skills` SET `racemask` = 2568 WHERE `racemask` = 520 AND `classMask` = 4 AND `skill` = 173; -- Hunter - Daggers

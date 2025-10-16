@@ -16,12 +16,16 @@ The goals for this project are very simple and limited, allowing for quick feedb
   - It shares the same starting zone, reputation, skills as the humans
   - High Elves can be any class except shaman or druid
 - Compatible with HD models
-- Compatible with mod-individual-progression (thanks to Dasbadman)
+
+### Extra features
+
+The "extras" directory contains optional features that can be installed on top of the base installation:
+- Compatibility patch to work with mod-individual-progression (thanks to Dasbadman)
+- Arcane Torrent spell for High Elf warriors (thanks to Dasbadman)
 
 ## Known limitations
 
 - No audio in emotes (such as /hi, /joke, etc)
-- If High Elves start with no weapons skills, ensure that you don't have any modules modifying skills as it may conflict. Compatibility enhancements to this mod are welcomed!
 
 ## Open issues
 
@@ -37,12 +41,76 @@ The goals for this project are very simple and limited, allowing for quick feedb
 
 ## Installation
 
+The mod requires both server and client files. The files are located in the `base mod/server` and `base mod/client` folders.
+
 Make sure you understand what each file and command does, and adjust the steps accordingly based on your setup. It is likely that some things don't apply to you if you don't have a Ubuntu + Playerbots setup.
 
-Installation consists of applying a patch and replacing DBC files on the server, and applying some mpq patches on the client.
+Installation consists of applying a patch in code and replacing DBC files on the server, recompiling, applying some data changes in the db, and applying some mpq patches on the client.
 
-1. Fully install and configure Azeroth Core with or without playerbots. Installing and setting up the basic Azeroth Core is out of scope of this doc. Installation instructions can be found in https://www.azerothcore.org/ .
-2. Follow the instructions in `Installation step by step.txt`.
+### Server installation
+
+- Fully install and configure Azeroth Core with or without playerbots. Installing and setting up the basic Azeroth Core is out of scope of this doc. Installation instructions can be found in https://www.azerothcore.org/ .
+
+- If installing on an existing server, run full backups using your standard backup scripts
+
+- Stop servers (no need to stop database if only one server)
+
+```
+sudo service ac-worldserver stop
+sudo service ac-authserver stop
+```
+
+- Apply patch to core (patch files located in "base mod" folder).
+
+```
+cd $AC_CODE_DIR && git apply highelf.patch
+```
+
+- Apply patch to playerbots (if you have playerbots)
+
+```
+cd $AC_CODE_DIR/modules/mod-playerbots && git apply highelf_playerbots.patch
+```
+
+- Recompile
+
+```
+cd $AC_CODE_DIR/build && \
+cmake ../ -DCMAKE_INSTALL_PREFIX=$AC_CODE_DIR/env/dist/ -DCMAKE_C_COMPILER=/usr/bin/clang -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DWITH_WARNINGS=0 -DENABLE_EXTRA_LOGS=0 -DTOOLS_BUILD=all -DSCRIPTS=static -DMODULES=static && \
+make -j$(nproc --ignore=1) && \
+make install
+```
+
+- Copy DBC files to the server and replace
+
+```
+cp -a "base mod/server/." $AC_CODE_DIR/build/data/dbc
+```
+
+- Run database updates in the database server:
+
+```
+sudo ./highelf_post_install.sh
+```
+
+- Start server
+
+```
+sudo service ac-authserver start
+sudo service ac-worldserver start
+```
+
+### Client installation
+
+- Copy the files from the "base mod/client/Data" folder into the client's Data folder
+
+- Delete the Cache folder of the client
+
+- Start the client
+
+### Updating azerothcore
+
+When updating azerothcore server follow the standard update steps found in www.azerothcore.org. Just keep in mind that you have installed a local patch and you have local changes. If any conflicts occur, that means this mod wasn't updated yet to the version of azerothcore you are trying to install. You can manually stash the changes, get the latest code, then pop the changes and fix conflicts.
 
 ## How this was built
 
@@ -61,3 +129,5 @@ See DBC `Creation Step by Step.txt` and `DBC Creation Step by Step SQL.sql`.
 ## Reporting bugs and contributing
 
 Bug reports and contributions are welcome. Please go to the Issues tab to submit a bug or enhancement request, or submit your contribution via Pull Request.
+
+Special thanks to [Dasbadman](https://github.com/Dasbadman) for many contributions. Including bugfixes, new features, and optional patches.
