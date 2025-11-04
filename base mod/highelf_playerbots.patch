@@ -1,0 +1,144 @@
+diff --git a/src/ChatHelper.cpp b/src/ChatHelper.cpp
+index 9ba3337f..ce946a92 100644
+--- a/src/ChatHelper.cpp
++++ b/src/ChatHelper.cpp
+@@ -181,6 +181,7 @@ ChatHelper::ChatHelper(PlayerbotAI* botAI) : PlayerbotAIAware(botAI)
+     races[RACE_UNDEAD_PLAYER] = "Undead";
+     races[RACE_BLOODELF] = "Blood Elf";
+     races[RACE_DRAENEI] = "Draenei";
++    races[RACE_HIGHELF] = "High Elf";
+ }
+ 
+ std::string const ChatHelper::formatMoney(uint32 copper)
+diff --git a/src/PlayerbotAI.cpp b/src/PlayerbotAI.cpp
+index fd7872ee..336d77f3 100644
+--- a/src/PlayerbotAI.cpp
++++ b/src/PlayerbotAI.cpp
+@@ -3929,7 +3929,7 @@ bool PlayerbotAI::canDispel(SpellInfo const* spellInfo, uint32 dispelType)
+ bool IsAlliance(uint8 race)
+ {
+     return race == RACE_HUMAN || race == RACE_DWARF || race == RACE_NIGHTELF || race == RACE_GNOME ||
+-           race == RACE_DRAENEI;
++           race == RACE_DRAENEI || race == RACE_HIGHELF;
+ }
+ 
+ bool PlayerbotAI::HasRealPlayerMaster()
+diff --git a/src/RandomPlayerbotFactory.cpp b/src/RandomPlayerbotFactory.cpp
+index 50cde2eb..3aa1511b 100644
+--- a/src/RandomPlayerbotFactory.cpp
++++ b/src/RandomPlayerbotFactory.cpp
+@@ -43,6 +43,8 @@ constexpr RandomPlayerbotFactory::NameRaceAndGender RandomPlayerbotFactory::Comb
+             return static_cast<NameRaceAndGender>(static_cast<uint8>(NameRaceAndGender::DraeneiMale) + gender);
+         case RACE_BLOODELF:
+             return static_cast<NameRaceAndGender>(static_cast<uint8>(NameRaceAndGender::BloodelfMale) + gender);
++        case RACE_HIGHELF:
++            return static_cast<NameRaceAndGender>(static_cast<uint8>(NameRaceAndGender::HighelfMale) + gender);
+         default:
+             LOG_ERROR("playerbots", "The race with ID %d does not have a naming category", race);
+             return static_cast<NameRaceAndGender>(static_cast<uint8>(NameRaceAndGender::GenericMale) + gender);
+@@ -64,6 +66,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     if (expansion >= EXPANSION_THE_BURNING_CRUSADE)
+     {
+         availableRaces[CLASS_WARRIOR].push_back(RACE_DRAENEI);
++        availableRaces[CLASS_WARRIOR].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_PALADIN].push_back(RACE_HUMAN);
+@@ -72,6 +75,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     {
+         availableRaces[CLASS_PALADIN].push_back(RACE_DRAENEI);
+         availableRaces[CLASS_PALADIN].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_PALADIN].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_ROGUE].push_back(RACE_HUMAN);
+@@ -84,6 +88,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     if (expansion >= EXPANSION_THE_BURNING_CRUSADE)
+     {
+         availableRaces[CLASS_ROGUE].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_ROGUE].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_PRIEST].push_back(RACE_HUMAN);
+@@ -95,6 +100,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     {
+         availableRaces[CLASS_PRIEST].push_back(RACE_DRAENEI);
+         availableRaces[CLASS_PRIEST].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_PRIEST].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_MAGE].push_back(RACE_HUMAN);
+@@ -105,6 +111,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     {
+         availableRaces[CLASS_MAGE].push_back(RACE_DRAENEI);
+         availableRaces[CLASS_MAGE].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_MAGE].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_WARLOCK].push_back(RACE_HUMAN);
+@@ -114,6 +121,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     if (expansion >= EXPANSION_THE_BURNING_CRUSADE)
+     {
+         availableRaces[CLASS_WARLOCK].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_WARLOCK].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_SHAMAN].push_back(RACE_ORC);
+@@ -133,6 +141,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+     {
+         availableRaces[CLASS_HUNTER].push_back(RACE_DRAENEI);
+         availableRaces[CLASS_HUNTER].push_back(RACE_BLOODELF);
++        availableRaces[CLASS_HUNTER].push_back(RACE_HIGHELF);
+     }
+ 
+     availableRaces[CLASS_DRUID].push_back(RACE_NIGHTELF);
+@@ -150,6 +159,7 @@ RandomPlayerbotFactory::RandomPlayerbotFactory(uint32 accountId) : accountId(acc
+         availableRaces[CLASS_DEATH_KNIGHT].push_back(RACE_DRAENEI);
+         availableRaces[CLASS_DEATH_KNIGHT].push_back(RACE_GNOME);
+         availableRaces[CLASS_DEATH_KNIGHT].push_back(RACE_DWARF);
++        availableRaces[CLASS_DEATH_KNIGHT].push_back(RACE_HIGHELF);
+     }
+ }
+ 
+diff --git a/src/RandomPlayerbotFactory.h b/src/RandomPlayerbotFactory.h
+index 94e51537..24fa57e9 100644
+--- a/src/RandomPlayerbotFactory.h
++++ b/src/RandomPlayerbotFactory.h
+@@ -41,7 +41,9 @@ public:
+         TaurenMale,
+         TaurenFemale,
+         BloodelfMale,
+-        BloodelfFemale
++        BloodelfFemale,
++        HighelfMale,
++        HighelfFemale
+     };
+ 
+     static constexpr NameRaceAndGender CombineRaceAndGender(uint8 gender, uint8 race);
+diff --git a/src/TravelMgr.cpp b/src/TravelMgr.cpp
+index def180ee..10a3c3f8 100644
+--- a/src/TravelMgr.cpp
++++ b/src/TravelMgr.cpp
+@@ -2459,6 +2459,7 @@ void TravelMgr::LoadQuestTravelTable()
+         startNames[RACE_TROLL] = "Orc and Troll";
+         startNames[RACE_DRAENEI] = "Draenei";
+         startNames[RACE_BLOODELF] = "Blood Elf";
++        startNames[RACE_HIGHELF] = "High Elf";
+ 
+         for (uint32 i = 0; i < MAX_RACES; i++)
+         {
+diff --git a/src/factory/PlayerbotFactory.cpp b/src/factory/PlayerbotFactory.cpp
+index e22671ea..2f25c245 100644
+--- a/src/factory/PlayerbotFactory.cpp
++++ b/src/factory/PlayerbotFactory.cpp
+@@ -2947,6 +2947,10 @@ void PlayerbotFactory::InitMounts()
+             slow = {33660, 35020, 35022, 35018};
+             fast = {35025, 35025, 35027};
+             break;
++        case RACE_HIGHELF:
++            slow = {470, 6648, 458, 472};
++            fast = {23228, 23227, 23229};
++            break;
+     }
+ 
+     switch (bot->GetTeamId())
