@@ -79,8 +79,6 @@ Update every 1029 (seems to be alliance paladin skills) to 3077
 Update every 512 skill to 2560 (belf only, now belf+high elf)
 	EXCEPT FOR spells 31898, 53733, 53736, 53742, 34767, 34769, 34767, 34769
 
-Add custom Arcane Torrent for High Elf Warrior
-
 
 Spell:
 Add definition for Arcane Torrent for High Elf Warrior
