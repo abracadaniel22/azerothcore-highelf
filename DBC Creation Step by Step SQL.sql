@@ -427,6 +427,11 @@ UPDATE db_SkillRaceClassInfo_12340
 set racemask = 4095
 where racemask = 2047;
 
+-- add High Elf warriors to the list of warrior races that can use one hand maces
+UPDATE db_SkillRaceClassInfo_12340
+set racemask = 3181
+where skillid = 54 and racemask = 1133;
+
 
 -- --------------------------------
 -- Spell
